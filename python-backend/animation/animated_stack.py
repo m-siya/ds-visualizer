@@ -3,11 +3,11 @@ import pyfastrand
 from collections import deque
 class AnimatedStack:
 
-    def __init__(self):
+    def __init__(self, buffer = None):
         self.name = "stack"
         self.id = pyfastrand.pcg32()
         self.contents = deque()
-        self.buffer = AnimationBuffer()
+        self.buffer = AnimationBuffer() if not buffer else buffer
 
     def push_back(self, element):
         self.buffer.write(data_structure = self.name, operation="push", id = self.id, data = element)
