@@ -1,20 +1,26 @@
 mod animation;
-use crate::animation::animated_stack::AnimatedStack;
-use crate::animation::animation_buffer::AnimationBuffer;
+use animation::*;
+
+buffer!();
+// TODO : make this buffer importable
 
 fn main() {
-    let buffer = AnimationBuffer::new();
-    let mut stack = AnimatedStack::new(&buffer);
+    let mut stack = create_stack!();
+    (0..10).for_each(|x| stack.push(format!("item {}", x)));
+    println!("{:?}", stack);
 
-    (0..10).for_each(|x| stack.push(x));
-
-    reverse(stack);
+    let stack = reverse(stack);
+    println!("{:?}", stack);
 }
 
-fn reverse(mut arr: AnimatedStack<i32>) -> AnimatedStack<i32> {
-    let mut reversed = AnimatedStack::new(arr.buffer);
-    while !arr.is_empty() {
-        reversed.push(arr.pop().unwrap());
+fn reverse<T>(mut stack: AnimatedStack<T>) -> AnimatedStack<T>
+where
+    T: std::fmt::Debug,
+{
+    let mut reversed = create_stack!();
+
+    while !stack.is_empty() {
+        reversed.push(stack.pop().unwrap());
     }
     reversed
 }
