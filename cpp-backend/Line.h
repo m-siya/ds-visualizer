@@ -52,14 +52,6 @@ namespace DS_Visualizer
     {
         LogFileHandler &logFile = LogFileHandler::getLogFile();
         std::cout << "The value that I received: " << *elem_type << std::endl;
-        logFile << ds_name;
-        logFile << "_";
-        logFile << ds_id;
-        logFile << ":";
-        logFile << operation;
-        logFile << "(";
-        logFile << *elem_type;
-        logFile << ")";
-        logFile << "\n";
-    }
+        logFile << ds_name << '_' << ds_id << ':' << operation << '(' << *elem_type << ')' << '\n';
+        }
 }
